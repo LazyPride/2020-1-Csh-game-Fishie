@@ -8,9 +8,11 @@ namespace Fishie
     {
         static void Main(string[] args)
         {
+            Log.Info("Logger started!");
             Game game = new Game();
             game.Run();
         }
           
     }
 }
+
