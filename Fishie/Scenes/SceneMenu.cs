@@ -1,45 +1,49 @@
 ﻿using SFML.Graphics;
+using SFML.System;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Fishie.Scenes
 {
-    class SceneMenu : IScene
+    public class SceneMenu : IScene
     {
+        public SceneMenu()
+        {
+
+        }
+
         public void Draw(RenderTarget target, RenderStates states)
         {
-            throw new NotImplementedException();
+            target.Draw(circle, states);
         }
 
         public void HandleInput()
         {
-            throw new NotImplementedException();
         }
 
         public void OnPop()
         {
-            throw new NotImplementedException();
         }
 
         public void OnPush()
         {
-            throw new NotImplementedException();
+            circle = new CircleShape(10.0f);
+            circle.Position = new Vector2f(100, 100);
         }
 
         public void RegisterEventHandlers(RenderWindow target)
         {
-            throw new NotImplementedException();
         }
 
         public void UnregisterEventHandlers(RenderWindow target)
         {
-            throw new NotImplementedException();
         }
 
-        public void Update(double deltaTime)
+        public void Update(float deltaTime)
         {
-            throw new NotImplementedException();
         }
+
+        private CircleShape circle;
     }
 }
