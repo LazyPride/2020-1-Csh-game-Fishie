@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Fishie.Entities
 {
-    interface Entity
+    public interface Entity
     {
         public void Init();
         public void HandleInput();

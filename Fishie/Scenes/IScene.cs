@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Fishie.Scenes
 {
-    interface IScene
+    public interface IScene
     {
         public void Init();
         public void HandleInput();
