@@ -26,7 +26,7 @@ namespace Fishie
         {
             Init();
             Clock clock = new Clock();
-            while (true)
+            while (window.IsOpen)
             {
                 float deltaTime = clock.Restart().AsSeconds();
                 window.DispatchEvents();
@@ -39,11 +39,18 @@ namespace Fishie
                 window.Clear(Color.Black);
                 window.Draw(currentScene);
                 window.Display();
+
+                TryPop();
             }
         }
         private void Init()
         {
-            scenes.Push(new SceneMenu());
+            window = new RenderWindow(new SFML.Window.VideoMode(800, 600), "Fishie");
+            window.SetVerticalSyncEnabled(true);
+            window.Closed += OnClose;
+
+            scenes = new Stack<IScene>();
+            PushScene(new SceneMenu());
         }
 
         private RenderWindow window;
@@ -64,6 +71,15 @@ namespace Fishie
                 }
                 IsShouldPop = false;
             }
+        }
+        private static void OnClose(object sender, EventArgs e)
+        {
+            if (sender.GetType() == typeof(RenderWindow))
+            {
+                RenderWindow window = (RenderWindow)sender;
+                window.Close();
+            }
+            
         }
     }
 }
