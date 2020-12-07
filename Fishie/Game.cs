@@ -2,47 +2,66 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Fishie.Scenes;
 using SFML;
 using SFML.Graphics;
 
 namespace Fishie
 {
-    class Game
+    public class Game
     {
+        public void PushScene(IScene scene)
+        {
+            scenes.Push(scene);
+            scene.OnPush();
+            scene.RegisterEventHandlers(window);
+        }
+        public void PopScene(int quantity)
+        {
+            IsShouldPop = true;
+            PopQuantity = quantity;
+        }
         public void Run()
         {
             Init();
-            RegisterEventHandlers();
-            while(true)
+            while (true)
             {
-                // Dispatch events
-                HandleInput();
-                Update();
-                Draw();
+                window.DispatchEvents();
+
+                IScene currentScene = scenes.Last();
+
+                currentScene.HandleInput();
+                currentScene.Update(0.0);
+
+                window.Clear(Color.Black);
+                window.Draw(currentScene);
+                window.Display();
             }
+        }
+        private void Init()
+        {
+            scenes.Push(new SceneMenu());
         }
 
         private RenderWindow window;
+        private Stack<IScene> scenes;
+        private bool IsShouldPop = false;
+        private int PopQuantity = 0;
 
-        private void Init()
+        private void TryPop()
         {
-
-        }
-        private void RegisterEventHandlers()
-        {
-
-        }
-        private void HandleInput()
-        {
-
-        }
-        private void Update()
-        {
-
-        }
-        private void Draw()
-        {
-
+            if (IsShouldPop)
+            {
+                while (PopQuantity > 0)
+                {
+                    IScene scene = scenes.Pop();
+                    scene.OnPop();
+                    scene.UnregisterEventHandlers(window);
+                    PopQuantity--;
+                }
+                IsShouldPop = false;
+            }
         }
     }
 }
+
