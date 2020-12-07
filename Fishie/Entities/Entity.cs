@@ -10,7 +10,7 @@ namespace Fishie.Entities
         public void Init();
         public void HandleInput();
         public void RegisterEventHandlers(RenderWindow target);
-        public void Update(Double deltaTime);
+        public void Update(float deltaTime);
         public void Draw(RenderTarget target, RenderStates states);
     }
 }

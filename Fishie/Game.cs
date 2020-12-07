@@ -5,6 +5,7 @@ using System.Text;
 using Fishie.Scenes;
 using SFML;
 using SFML.Graphics;
+using SFML.System;
 
 namespace Fishie
 {
@@ -24,14 +25,16 @@ namespace Fishie
         public void Run()
         {
             Init();
+            Clock clock = new Clock();
             while (true)
             {
+                float deltaTime = clock.Restart().AsSeconds();
                 window.DispatchEvents();
 
                 IScene currentScene = scenes.Last();
 
                 currentScene.HandleInput();
-                currentScene.Update(0.0);
+                currentScene.Update(deltaTime);
 
                 window.Clear(Color.Black);
                 window.Draw(currentScene);

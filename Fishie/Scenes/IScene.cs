@@ -12,6 +12,6 @@ namespace Fishie.Scenes
         public void HandleInput();
         public void RegisterEventHandlers(RenderWindow target);
         public void UnregisterEventHandlers(RenderWindow target);
-        public void Update(Double deltaTime);
+        public void Update(float deltaTime);
     }
 }
