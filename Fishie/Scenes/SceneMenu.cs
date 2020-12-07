@@ -17,12 +17,22 @@ namespace Fishie.Scenes
             throw new NotImplementedException();
         }
 
-        public void Init()
+        public void OnPop()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnPush()
         {
             throw new NotImplementedException();
         }
 
         public void RegisterEventHandlers(RenderWindow target)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UnregisterEventHandlers(RenderWindow target)
         {
             throw new NotImplementedException();
         }
