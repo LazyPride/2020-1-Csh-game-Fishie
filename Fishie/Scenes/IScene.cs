@@ -7,7 +7,7 @@ namespace Fishie.Scenes
 {
     public interface IScene : Drawable
     {
-        public void OnPush();
+        public void OnPush(Game game);
         public void OnPop();
         public void HandleInput();
         public void RegisterEventHandlers(RenderWindow target);
