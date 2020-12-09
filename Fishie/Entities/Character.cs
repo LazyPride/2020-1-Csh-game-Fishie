@@ -1,30 +1,34 @@
 ﻿using Fishie.Behaviour;
 using SFML.Graphics;
+using SFML.System;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Fishie.Entities
 {
-    class CharacterFacade
+    // Facade + strategy
+    public class Character : PhysicalObject
     {
-        private IControlStrategy controlStrategy;
-        private IDrawStrategy drawStrategy;
-        private IUpdateStrategy updateStrategy;
+        public IControlStrategy ControlStrategy { get; set; }
+        public IUpdateStrategy UpdateStrategy { get; set; }
+        
+        // TODO: Effect system
 
-        public void Draw(RenderTarget target, RenderStates states)
+        public Character(IControlStrategy controlStrategy, IUpdateStrategy updateStrategy)
         {
-            //drawStrategy.Draw(target, states);
+            ControlStrategy = controlStrategy;
+            UpdateStrategy = updateStrategy;
         }
 
         public void HandleInput()
         {
-            //controlStrategy.HandleInput()
+            ControlStrategy.HandleInput(this);
         }
 
         public void Update(float deltaTime)
         {
-            updateStrategy.Update(deltaTime);
+            UpdateStrategy.Update(this, deltaTime);
         }
     }
 }

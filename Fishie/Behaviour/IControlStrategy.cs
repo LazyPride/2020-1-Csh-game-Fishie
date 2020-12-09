@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Fishie.Entities;
+using SFML.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Fishie.Behaviour
 {
-    interface IControlStrategy
+    public interface IControlStrategy
     {
-        public void HandleInput();
+        public void HandleInput(Character character);
     }
 }

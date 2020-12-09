@@ -8,29 +8,16 @@ using System.Text;
 
 namespace Fishie.Entities
 {
-    public class Fish : Transformable, Entity, Drawable
+    public class Fish : Entity, Drawable
     {
-        private IControlStrategy controlStrategy;
-        private IDrawStrategy drawStrategy;
-        private IUpdateStrategy updateStrategy;
-
-        /* Put into Physical object */
-        public Vector2f Acceleration { get; set; }
-        public Vector2f Velocity { get; set; }
-        public float VelocityAngular { get; set; }
-        public float Mass { get; set; }
-        public float MassInverted { get; set; }
-        public float Interia { get; set; }
-
-        CircleShape shape;
+        Character character;
+        CircleShape shape = new CircleShape(12.0f, 5);
         RenderWindow window;
         public Fish(RenderWindow window)
         {
-            shape = new CircleShape(12.0f, 5);
-            shape.Origin = new Vector2f(12.0f, 12.0f);
-            shape.Position = new Vector2f(300.0f, 300.0f);
-            Position = new Vector2f(300.0f, 300.0f);
             this.window = window;
+            character = new Character(new ControlStrategyFollowMouse(window), new UpdateStrategyVelocity());
+            shape.Origin = new Vector2f(12.0f, 12.0f);
         }
 
         public void Draw(RenderTarget target, RenderStates states)
@@ -40,21 +27,7 @@ namespace Fishie.Entities
 
         public void HandleInput()
         {
-            Vector2f direction = (Vector2f)Mouse.GetPosition(window) - Position;
-
-            double angle = Math.Atan2(direction.Y, direction.X) * 180.0 / Math.PI + 180.0;
-            if (!Double.IsNaN(angle))
-            {
-                Rotation = (float)angle;
-            }
-
-            Velocity = direction * 2.0f;
-           
-        }
-
-        public void Init()
-        {
-
+            character.HandleInput();
         }
 
         public void RegisterEventHandlers(RenderWindow target)
@@ -64,10 +37,9 @@ namespace Fishie.Entities
 
         public void Update(float deltaTime)
         {
-            Position += Velocity * deltaTime;
-
-            shape.Position = Position;
-            shape.Rotation = Rotation;
+            character.Update(deltaTime);
+            shape.Position = character.Position;
+            shape.Rotation = character.Rotation;
         }
     }
 }

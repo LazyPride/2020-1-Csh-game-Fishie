@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Fishie.Entities;
+using SFML.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Fishie.Behaviour
 {
-    interface IUpdateStrategy
+    public interface IUpdateStrategy
     {
-        public void Update(float DeltaTime);
+        public void Update(Character character, float deltaTime);
     }
 }
