@@ -18,7 +18,6 @@ namespace Fishie.Behaviour
         public void HandleInput(Character character)
         {
             Vector2f direction = (Vector2f)Mouse.GetPosition(window) - character.Position;
-
             double angle = Math.Atan2(direction.Y, direction.X) * 180.0 / Math.PI + 180.0;
             if (!Double.IsNaN(angle))
             {
