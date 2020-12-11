@@ -50,7 +50,7 @@ namespace Fishie
         private void Init()
         {
             window = new RenderWindow(new SFML.Window.VideoMode(800, 600), "Fishie");
-            view = new View(new FloatRect(0.0f, 0.0f, 800.0f, 600.0f));
+            
             window.SetVerticalSyncEnabled(true);
             window.Closed += OnClose;
 
@@ -59,7 +59,6 @@ namespace Fishie
         }
 
         private RenderWindow window;
-        private View view;
         private Stack<IScene> scenes;
         private bool IsShouldPop = false;
         private int PopQuantity = 0;

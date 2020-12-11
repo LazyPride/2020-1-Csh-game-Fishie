@@ -10,9 +10,9 @@ namespace Fishie.Entities
 {
     public class Fish : Entity, Drawable
     {
-        Character character;
-        CircleShape shape = new CircleShape(12.0f, 5);
-        RenderWindow window;
+        private Character character;
+        private CircleShape shape = new CircleShape(12.0f, 5);
+        private RenderWindow window;
         public Fish(RenderWindow window)
         {
             this.window = window;
@@ -40,6 +40,12 @@ namespace Fishie.Entities
             character.Update(deltaTime);
             shape.Position = character.Position;
             shape.Rotation = character.Rotation;
+        }
+
+
+        public Character GetCharacter()
+        {
+            return character;
         }
     }
 }
