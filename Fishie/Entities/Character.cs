@@ -12,13 +12,15 @@ namespace Fishie.Entities
     {
         public IControlStrategy ControlStrategy { get; set; }
         public IUpdateStrategy UpdateStrategy { get; set; }
-        
+        public ICollideStrategy CollideStrategy { get; set; }
+
         // TODO: Effect system
 
-        public Character(IControlStrategy controlStrategy, IUpdateStrategy updateStrategy)
+        public Character(IControlStrategy controlStrategy, IUpdateStrategy updateStrategy, ICollideStrategy collideStrategy)
         {
             ControlStrategy = controlStrategy;
             UpdateStrategy = updateStrategy;
+            CollideStrategy = collideStrategy;
         }
 
         public void HandleInput()
@@ -29,6 +31,19 @@ namespace Fishie.Entities
         public void Update(float deltaTime)
         {
             UpdateStrategy.Update(this, deltaTime);
+        }
+
+        public void RegisterEventHandlers(RenderWindow target)
+        {
+        }
+
+        public void Draw(RenderTarget target, RenderStates states)
+        {
+        }
+
+        public void OnCollide(Entity Lhs, Entity Rhs)
+        {
+            CollideStrategy.OnCollide(Lhs, Rhs);
         }
     }
 }

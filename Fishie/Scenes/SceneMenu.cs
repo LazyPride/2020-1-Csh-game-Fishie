@@ -17,7 +17,7 @@ namespace Fishie.Scenes
         public void Draw(RenderTarget target, RenderStates states)
         {
             target.Draw(circle, states);
-            target.Draw(fish, states);
+            target.Draw(world, states);
             target.Draw(cursor, states);
         }
 
@@ -35,11 +35,18 @@ namespace Fishie.Scenes
         public void OnPush(Game game)
         {
             this.game = game;
+            world = new World();
+
             circle = new CircleShape(10.0f);
             circle.Position = new Vector2f(100, 100);
             fish = new Fish(game.GetWindow());
             camera = new Camera(new Vector2f(800, 600), game.GetWindow(), fish.GetCharacter());
             cursor = new Cursor(game.GetWindow());
+
+            FishLittle little = new FishLittle();
+            world.AddEnity(fish);
+            world.AddEnity(little);
+
             game.GetWindow().SetMouseCursorVisible(false);
         }
 
@@ -53,13 +60,14 @@ namespace Fishie.Scenes
 
         public void Update(float deltaTime)
         {
-            fish.Update(deltaTime);
+            world.Update(deltaTime);
             cursor.Update(deltaTime);
             camera.Update();
 
         }
 
         private Game game;
+        private World world;
         private CircleShape circle;
         private Fish fish;
         private Camera camera;

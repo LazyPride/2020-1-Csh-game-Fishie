@@ -8,6 +8,7 @@ namespace Fishie.Entities
 {
     abstract public class PhysicalObject : Transformable
     {
+        public float Radius { get; set; }
         public Vector2f Acceleration { get; set; }
         public Vector2f Velocity { get; set; }
         public Vector2f AccelerationAngular { get; set; }

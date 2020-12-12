@@ -16,8 +16,11 @@ namespace Fishie.Entities
         public Fish(RenderWindow window)
         {
             this.window = window;
-            character = new Character(new ControlStrategyFollowMouse(window), new UpdateStrategyVelocity());
+            character = new Character(new ControlStrategyFollowMouse(window),
+                                        new UpdateStrategyVelocity(),
+                                        new CollideStrategyStatic());
             shape.Origin = new Vector2f(12.0f, 12.0f);
+            character.Radius = 12.0f;
         }
 
         public void Draw(RenderTarget target, RenderStates states)
@@ -46,6 +49,11 @@ namespace Fishie.Entities
         public Character GetCharacter()
         {
             return character;
+        }
+
+        public void OnCollide(Entity entity)
+        {
+            character.OnCollide(this, entity);
         }
     }
 }

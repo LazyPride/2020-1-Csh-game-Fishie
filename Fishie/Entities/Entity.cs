@@ -11,5 +11,8 @@ namespace Fishie.Entities
         public void RegisterEventHandlers(RenderWindow target);
         public void Update(float deltaTime);
         public void Draw(RenderTarget target, RenderStates states);
+        public Character GetCharacter();
+        public void OnCollide(Entity entity);
+
     }
 }

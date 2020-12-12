@@ -1,23 +1,27 @@
 ﻿using Fishie.Behaviour;
 using SFML.Graphics;
 using SFML.System;
+using SFML.Window;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Fishie.Entities
 {
-    public class Cursor : Entity, Drawable
+    public class FishLittle : Entity, Drawable
     {
         private Character character;
-        private CircleShape shape = new CircleShape(6.0f, 3);
-        private RenderWindow window;
-        public Cursor(RenderWindow window)
+        private CircleShape shape = new CircleShape(8.0f, 12);
+        public FishLittle()
         {
-            this.window = window;
-            character = new Character(new ControlStrategyMouse(window), new UpdateStrategyVelocity(), new CollideStrategyStatic());
-            shape.Origin = new Vector2f(3.0f, 3.0f);
-            shape.FillColor = Color.Red;
+            character = new Character(new ControlStrategyStatic(),
+                                        new UpdateStrategyVelocity(),
+                                        new CollideStrategyStatic());
+            shape.Origin = new Vector2f(8.0f, 8.0f);
+            shape.FillColor = Color.Green;
+            character.Position = new Vector2f(-100.0f, 100.0f);
+            character.Radius = 8.0f;
+
         }
 
         public void Draw(RenderTarget target, RenderStates states)
@@ -27,7 +31,6 @@ namespace Fishie.Entities
 
         public void HandleInput()
         {
-            character.HandleInput();
         }
 
         public void RegisterEventHandlers(RenderWindow target)
@@ -39,7 +42,9 @@ namespace Fishie.Entities
         {
             character.Update(deltaTime);
             shape.Position = character.Position;
+            shape.Rotation = character.Rotation;
         }
+
 
         public Character GetCharacter()
         {
@@ -48,6 +53,7 @@ namespace Fishie.Entities
 
         public void OnCollide(Entity entity)
         {
+            character.OnCollide(this, entity);
         }
     }
 }
