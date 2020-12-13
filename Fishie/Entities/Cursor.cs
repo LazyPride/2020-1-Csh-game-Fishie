@@ -7,46 +7,38 @@ using System.Text;
 
 namespace Fishie.Entities
 {
-    public class Cursor : Entity, Drawable
+    public class Cursor : Entity
     {
-        private Character character;
         public Cursor(RenderWindow window)
         {
-            character = new Character();
-            character.ControlStrategy = new ControlStrategyMouse(window);
-            character.UpdateStrategy = new UpdateStrategyVelocity();
-            character.CollideStrategy = new CollideStrategyStatic();
-            character.Radius = 6.0f;
-            character.PointCount = 3;
-            character.FillColor = Color.Red;
+            Character = new Character(this);
+            Character.ControlStrategy = new ControlStrategyMouse(window);
+            Character.UpdateStrategy = new UpdateStrategyVelocity();
+            Character.Radius = 6.0f;
+            Character.PointCount = 3;
+            Character.FillColor = Color.Red;
         }
 
-        public void Draw(RenderTarget target, RenderStates states)
+        public override void Draw(RenderTarget target, RenderStates states)
         {
-            target.Draw(character, states);
+            target.Draw(Character, states);
         }
 
-        public void HandleInput()
+        public override void HandleInput()
         {
-            character.HandleInput();
+            Character.HandleInput();
         }
 
-        public void RegisterEventHandlers(RenderWindow target)
+        public override void RegisterEventHandlers(RenderWindow target)
         {
 
         }
 
-        public void Update(float deltaTime)
+        public override void Update(float deltaTime)
         {
-            character.Update(deltaTime);
+            Character.Update(deltaTime);
         }
-
-        public Character GetCharacter()
-        {
-            return character;
-        }
-
-        public void OnCollide(Entity entity)
+        public override void OnCollide(Entity entity)
         {
         }
     }

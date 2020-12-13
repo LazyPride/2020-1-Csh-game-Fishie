@@ -7,6 +7,6 @@ namespace Fishie.Behaviour
 {
     public interface ICollideStrategy
     {
-        public void OnCollide(Entity Lhs, Entity Rhs);
+        public void OnCollide(Entity A, Entity B);
     }
 }

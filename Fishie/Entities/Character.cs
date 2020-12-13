@@ -51,18 +51,10 @@ namespace Fishie.Entities
         public ICollideStrategy CollideStrategy { get; set; }
 
         // TODO: Effect system
-        public Character()
+        public Character(Entity entity)
         {
-
+            this.entity = entity;
         }
-        public Character(float radius, IControlStrategy controlStrategy, IUpdateStrategy updateStrategy, ICollideStrategy collideStrategy)
-        {
-            circle.Radius = radius;
-            ControlStrategy = controlStrategy;
-            UpdateStrategy = updateStrategy;
-            CollideStrategy = collideStrategy;
-        }
-
         public void HandleInput()
         {
             ControlStrategy.HandleInput(this);
@@ -84,11 +76,12 @@ namespace Fishie.Entities
             target.Draw(circle, states);
         }
 
-        public void OnCollide(Entity Lhs, Entity Rhs)
+        public void OnCollide(Entity entity)
         {
-            CollideStrategy.OnCollide(Lhs, Rhs);
+            CollideStrategy.OnCollide(this.entity, entity);
         }
 
         private CircleShape circle = new CircleShape();
+        private Entity entity;
     }
 }

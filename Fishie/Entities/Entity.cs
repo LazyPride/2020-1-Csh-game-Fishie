@@ -5,14 +5,14 @@ using System.Text;
 
 namespace Fishie.Entities
 {
-    public interface Entity
+    public abstract class Entity : Drawable
     {
-        public void HandleInput();
-        public void RegisterEventHandlers(RenderWindow target);
-        public void Update(float deltaTime);
-        public void Draw(RenderTarget target, RenderStates states);
-        public Character GetCharacter();
-        public void OnCollide(Entity entity);
+        public Character Character { set;  get; }
+        public abstract void HandleInput();
+        public abstract void RegisterEventHandlers(RenderWindow target);
+        public abstract void Update(float deltaTime);
+        public abstract void Draw(RenderTarget target, RenderStates states);
+        public abstract void OnCollide(Entity entity);
 
     }
 }

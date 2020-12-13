@@ -54,8 +54,8 @@ namespace Fishie.Entities
 
         private bool Intersects(Entity lhs, Entity rhs)
         {
-            Character A = lhs.GetCharacter();
-            Character B = rhs.GetCharacter();
+            Character A = lhs.Character;
+            Character B = rhs.Character;
 
             Vector2f Distance = B.Position - A.Position;
             float RadiusSum = A.Radius + B.Radius;

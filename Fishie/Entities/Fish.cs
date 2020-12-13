@@ -8,52 +8,41 @@ using System.Text;
 
 namespace Fishie.Entities
 {
-    public class Fish : Entity, Drawable
+    public class Fish : Entity
     {
-        private Character character;
-        private RenderWindow window;
         public Fish(RenderWindow window)
         {
             this.window = window;
-            character = new Character();
-            character.ControlStrategy = new ControlStrategyFollowMouse(window);
-            character.UpdateStrategy = new UpdateStrategyVelocity();
-            character.CollideStrategy = new CollideStrategyStatic();
-            character.Radius = 12.0f;
-            character.PointCount = 4;
-            character.FillColor = Color.Magenta;
-            character.Position = new Vector2f(100.0f, 100.0f);
+            Character = new Character(this);
+            Character.ControlStrategy = new ControlStrategyFollowMouse(window);
+            Character.UpdateStrategy = new UpdateStrategyVelocity();
+            Character.CollideStrategy = new CollideStrategyStatic();
+            Character.Radius = 12.0f;
+            Character.PointCount = 4;
+            Character.FillColor = Color.Magenta;
+            Character.Position = new Vector2f(100.0f, 100.0f);
         }
-
-        public void Draw(RenderTarget target, RenderStates states)
+        public override void Draw(RenderTarget target, RenderStates states)
         {
-            character.Draw(target, states);
+            Character.Draw(target, states);
         }
-
-        public void HandleInput()
+        public override void HandleInput()
         {
-            character.HandleInput();
+            Character.HandleInput();
         }
-
-        public void RegisterEventHandlers(RenderWindow target)
+        public override void RegisterEventHandlers(RenderWindow target)
         {
 
         }
-
-        public void Update(float deltaTime)
+        public override void Update(float deltaTime)
         {
-            character.Update(deltaTime);
+            Character.Update(deltaTime);
+        }
+        public override void OnCollide(Entity entity)
+        {
+            Character.OnCollide(entity);
         }
 
-
-        public Character GetCharacter()
-        {
-            return character;
-        }
-
-        public void OnCollide(Entity entity)
-        {
-            character.OnCollide(this, entity);
-        }
+        private RenderWindow window;
     }
 }

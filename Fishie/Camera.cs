@@ -9,26 +9,23 @@ namespace Fishie
 {
     public class Camera
     {
-        private View view;
-        private Character character;
-        private RenderWindow window;
-        public Camera(Vector2f Size, RenderWindow window, Character characterToFollow)
+        public Camera(Vector2f Size, RenderWindow window, Entity entityToFollow)
         {
             this.window = window;
-            this.view = new View(characterToFollow.Position, Size);
-            this.Follow(characterToFollow);
+            this.view = new View(entityToFollow.Character.Position, Size);
+            this.Follow(entityToFollow);
         }
 
-        public void Follow(Character characterToFollow)
+        public void Follow(Entity entityToFollow)
         {
-            this.character = characterToFollow;
-            this.view.Center = this.character.Position;
+            this.entity = entityToFollow;
+            this.view.Center = this.entity.Character.Position;
         }
 
         public void Update()
         {
             // TODO: Fancy camera movement
-            view.Center = character.Position;
+            view.Center = entity.Character.Position;
             window.SetView(view);
         }
 
@@ -36,5 +33,9 @@ namespace Fishie
         {
             return view;
         }
+
+        private View view;
+        private Entity entity;
+        private RenderWindow window;
     }
 }

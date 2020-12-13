@@ -8,50 +8,43 @@ using System.Text;
 
 namespace Fishie.Entities
 {
-    public class FishLittle : Entity, Drawable
+    public class FishLittle : Entity
     {
-        private Character character;
         private CircleShape shape = new CircleShape(8.0f, 12);
         public FishLittle()
         {
-            character = new Character();
-            character.ControlStrategy = new ControlStrategyStatic();
-            character.UpdateStrategy = new UpdateStrategyVelocity();
-            character.CollideStrategy = new CollideStrategyStatic();
-            character.Radius = 8.0f;
-            character.FillColor = Color.Green;
-            character.Position = new Vector2f(-100.0f, 100.0f);
+            Character = new Character(this);
+            Character.ControlStrategy = new ControlStrategyStatic();
+            Character.UpdateStrategy = new UpdateStrategyVelocity();
+            Character.CollideStrategy = new CollideStrategyStatic();
+            Character.Radius = 8.0f;
+            Character.FillColor = Color.Green;
+            Character.Position = new Vector2f(-100.0f, 100.0f);
             
         }
 
-        public void Draw(RenderTarget target, RenderStates states)
+        public override void Draw(RenderTarget target, RenderStates states)
         {
-            target.Draw(character, states);
+            target.Draw(Character, states);
         }
 
-        public void HandleInput()
+        public override void HandleInput()
         {
         }
 
-        public void RegisterEventHandlers(RenderWindow target)
+        public override void RegisterEventHandlers(RenderWindow target)
         {
 
         }
 
-        public void Update(float deltaTime)
+        public override void Update(float deltaTime)
         {
-            character.Update(deltaTime);
+            Character.Update(deltaTime);
         }
 
-
-        public Character GetCharacter()
+        public override void OnCollide(Entity entity)
         {
-            return character;
-        }
-
-        public void OnCollide(Entity entity)
-        {
-            character.OnCollide(this, entity);
+            Character.OnCollide(entity);
         }
     }
 }
