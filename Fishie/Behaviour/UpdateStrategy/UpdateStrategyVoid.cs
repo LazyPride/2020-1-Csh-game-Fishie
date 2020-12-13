@@ -1,19 +1,14 @@
 ﻿using Fishie.Entities;
 using SFML.Graphics;
-using SFML.System;
-using SFML.Window;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Fishie.Behaviour
 {
-    public class ControlStrategyStatic : IControlStrategy
+    public class UpdateStrategyVoid : IUpdateStrategy
     {
-        public ControlStrategyStatic()
-        {
-        }
-        public void HandleInput(Character character)
+        public void Update(Character character, float deltaTime)
         {
             // Do nothing
         }
