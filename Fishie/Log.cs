@@ -15,6 +15,7 @@ namespace Fishie
             using var loggerFactory = LoggerFactory.Create(builder =>
             {
                 builder
+                    .AddFilter("", LogLevel.Trace)
                     .AddConsole();
             });
              logger = loggerFactory.CreateLogger<Log>();

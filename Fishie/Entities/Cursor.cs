@@ -41,5 +41,13 @@ namespace Fishie.Entities
         public override void OnCollide(Entity entity)
         {
         }
+       
+        protected override void DoTouch(Entity entity)
+        {
+        }
+
+        protected override void DoDetach(Entity entity)
+        {
+        }
     }
 }

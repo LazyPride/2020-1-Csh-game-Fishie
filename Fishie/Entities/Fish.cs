@@ -18,7 +18,7 @@ namespace Fishie.Entities
             Character.ControlStrategy = new ControlStrategyFollowMouse(window);
             Character.UpdateStrategy = new UpdateStrategyVelocity();
             Character.CollideStrategy = new CollideStrategyStatic();
-            Character.Radius = 120.0f;
+            Character.Radius = 12.0f;
             Character.PointCount = 4;
             Character.FillColor = Color.Magenta;
             Character.Position = new Vector2f(100.0f, 100.0f);
@@ -42,6 +42,15 @@ namespace Fishie.Entities
         public override void OnCollide(Entity entity)
         {
             Character.OnCollide(entity);
+        }
+
+        protected override void DoTouch(Entity entity)
+        {
+            Character.ApplyEffect(new EffectSwapColors(this, entity));
+        }
+
+        protected override void DoDetach(Entity entity)
+        {
             Character.ApplyEffect(new EffectSwapColors(this, entity));
         }
 

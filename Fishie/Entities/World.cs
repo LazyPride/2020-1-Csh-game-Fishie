@@ -44,14 +44,29 @@ namespace Fishie.Entities
                 {
                     if (Intersects(entities[i], entities[j]))
                     {
-                        // TODO: Generate manifold
                         entities[i].OnCollide(entities[j]);
                         entities[j].OnCollide(entities[i]);
+                    }
+                    if (Touch(entities[i], entities[j]))
+                    {
+                        if (!entities[i].HasContact(entities[j])) {
+                            entities[i].OnTouch(entities[j]);
+                            entities[j].OnTouch(entities[i]);
+                            Log.Debug("Touch!");
+                        }
+                    }
+                    else
+                    {
+                        if (entities[i].HasContact(entities[j]))
+                        {
+                            entities[i].OnDetach(entities[j]);
+                            entities[j].OnDetach(entities[i]);
+                            Log.Debug("Detach!");
+                        }
                     }
                 }
             }
         }
-
         private bool Intersects(Entity lhs, Entity rhs)
         {
             Character A = lhs.Character;
@@ -60,16 +75,21 @@ namespace Fishie.Entities
             Vector2f Distance = B.Position - A.Position;
             float RadiusSum = A.Radius + B.Radius;
             float DistanceLen = Distance.X * Distance.X + Distance.Y * Distance.Y;
-            if (DistanceLen > RadiusSum * RadiusSum)
-            {
-                return false;
-            }
+            return (DistanceLen < RadiusSum * RadiusSum);
+        }
+        private bool Touch(Entity lhs, Entity rhs)
+        {
+            Character A = lhs.Character;
+            Character B = rhs.Character;
 
-            // TODO: Add manifold generation
-            return true;
+            Vector2f Distance = B.Position - A.Position;
+            float RadiusSum = A.Radius + B.Radius;
+            float DistanceLen = (float) Math.Sqrt((double)(Distance.X * Distance.X + Distance.Y * Distance.Y));
+            return (Math.Abs(DistanceLen - RadiusSum) < TOUCH_GAP);
         }
 
         private Vector2f gravity;
         private List<Entity> entities = new List<Entity>();
+        private const float TOUCH_GAP = 5.0f;
     }
 }

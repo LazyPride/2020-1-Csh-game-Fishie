@@ -13,7 +13,6 @@ namespace Fishie.Effects
         {
             this.A = A;
             this.B = B;
-            Timeout = 0.1f;
         }
         public override void Update(float deltaTime)
         {
@@ -21,14 +20,14 @@ namespace Fishie.Effects
 
         public override void OnApply()
         {
-            
+            Color color = A.Character.FillColor;
+            A.Character.FillColor = B.Character.FillColor;
+            B.Character.FillColor = color;
         }
 
         public override void OnTimeoutElapsed()
         {
-            Color color = A.Character.FillColor;
-            A.Character.FillColor = B.Character.FillColor;
-            B.Character.FillColor = color;
+            
         }
 
         public override void Draw(RenderTarget target, RenderStates states)

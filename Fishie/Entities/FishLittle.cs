@@ -17,10 +17,9 @@ namespace Fishie.Entities
             Character.ControlStrategy = new ControlStrategyVoid();
             Character.UpdateStrategy = new UpdateStrategyVelocity();
             Character.CollideStrategy = new CollideStrategyStatic();
-            Character.Radius = 80.0f;
+            Character.Radius = 8.0f;
             Character.FillColor = Color.Green;
             Character.Position = new Vector2f(-100.0f, 100.0f);
-            
         }
 
         public override void Draw(RenderTarget target, RenderStates states)
@@ -45,6 +44,14 @@ namespace Fishie.Entities
         public override void OnCollide(Entity entity)
         {
             Character.OnCollide(entity);
+        }
+
+        protected override void DoTouch(Entity entity)
+        {
+        }
+
+        protected override void DoDetach(Entity entity)
+        {
         }
     }
 }
