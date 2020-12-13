@@ -57,12 +57,12 @@ namespace Fishie.Entities
         }
         public void HandleInput()
         {
-            ControlStrategy.HandleInput(this);
+            if (ControlStrategy != null) ControlStrategy.HandleInput(this);
         }
 
         public void Update(float deltaTime)
         {
-            UpdateStrategy.Update(this, deltaTime);
+            if (UpdateStrategy != null) UpdateStrategy.Update(this, deltaTime);
             circle.Position = Position;
             circle.Rotation = Rotation;
         }
@@ -78,7 +78,7 @@ namespace Fishie.Entities
 
         public void OnCollide(Entity entity)
         {
-            CollideStrategy.OnCollide(this.entity, entity);
+            if (CollideStrategy != null) CollideStrategy.OnCollide(this.entity, entity);
         }
 
         private CircleShape circle = new CircleShape();
