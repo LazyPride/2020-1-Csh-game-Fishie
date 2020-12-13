@@ -57,12 +57,12 @@ namespace Fishie.Entities
         }
         public void HandleInput()
         {
-            if (ControlStrategy != null) ControlStrategy.HandleInput(this);
+            if (ControlStrategy != null) ControlStrategy.HandleInput(entity);
         }
 
         public void Update(float deltaTime)
         {
-            if (UpdateStrategy != null) UpdateStrategy.Update(this, deltaTime);
+            if (UpdateStrategy != null) UpdateStrategy.Update(entity, deltaTime);
             circle.Position = Position;
             circle.Rotation = Rotation;
         }

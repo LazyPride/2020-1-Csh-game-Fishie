@@ -8,7 +8,7 @@ namespace Fishie.Behaviour
 {
     public class UpdateStrategyVoid : IUpdateStrategy
     {
-        public void Update(Character character, float deltaTime)
+        public void Update(Entity entity, float deltaTime)
         {
             // Do nothing
         }

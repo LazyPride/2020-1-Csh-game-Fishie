@@ -8,6 +8,6 @@ namespace Fishie.Behaviour
 {
     public interface IUpdateStrategy
     {
-        public void Update(Character character, float deltaTime);
+        public void Update(Entity entity, float deltaTime);
     }
 }

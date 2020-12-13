@@ -14,7 +14,7 @@ namespace Fishie.Entities
         public FishLittle()
         {
             Character = new Character(this);
-            Character.ControlStrategy = new ControlStrategyStatic();
+            Character.ControlStrategy = new ControlStrategyVoid();
             Character.UpdateStrategy = new UpdateStrategyVelocity();
             Character.CollideStrategy = new CollideStrategyStatic();
             Character.Radius = 8.0f;

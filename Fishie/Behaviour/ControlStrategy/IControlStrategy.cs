@@ -8,6 +8,6 @@ namespace Fishie.Behaviour
 {
     public interface IControlStrategy
     {
-        public void HandleInput(Character character);
+        public void HandleInput(Entity entity);
     }
 }

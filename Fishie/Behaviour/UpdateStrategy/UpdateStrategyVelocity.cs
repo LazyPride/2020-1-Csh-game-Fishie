@@ -8,9 +8,9 @@ namespace Fishie.Behaviour
 {
     public class UpdateStrategyVelocity : IUpdateStrategy
     {
-        public void Update(Character character, float deltaTime)
+        public void Update(Entity entity, float deltaTime)
         {
-            character.Position += character.Velocity * deltaTime;
+            entity.Character.Position += entity.Character.Velocity * deltaTime;
         }
     }
 }

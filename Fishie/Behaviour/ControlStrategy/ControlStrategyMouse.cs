@@ -15,9 +15,9 @@ namespace Fishie.Behaviour
         {
             this.window = window;
         }
-        public void HandleInput(Character character)
+        public void HandleInput(Entity entity)
         {
-            character.Position = (Vector2f)Mouse.GetPosition(window);
+            entity.Character.Position = (Vector2f)Mouse.GetPosition(window);
         }
     }
 }

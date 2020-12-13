@@ -10,7 +10,7 @@ namespace Fishie.Behaviour
 {
     public class ControlStrategyVoid : IControlStrategy
     {
-        public void HandleInput(Character character)
+        public void HandleInput(Entity entity)
         {
             // Do nothing
         }
