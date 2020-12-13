@@ -11,21 +11,23 @@ namespace Fishie.Entities
     public class Fish : Entity, Drawable
     {
         private Character character;
-        private CircleShape shape = new CircleShape(12.0f, 5);
         private RenderWindow window;
         public Fish(RenderWindow window)
         {
             this.window = window;
-            character = new Character(new ControlStrategyFollowMouse(window),
-                                        new UpdateStrategyVelocity(),
-                                        new CollideStrategyStatic());
-            shape.Origin = new Vector2f(12.0f, 12.0f);
+            character = new Character();
+            character.ControlStrategy = new ControlStrategyFollowMouse(window);
+            character.UpdateStrategy = new UpdateStrategyVelocity();
+            character.CollideStrategy = new CollideStrategyStatic();
             character.Radius = 12.0f;
+            character.PointCount = 4;
+            character.FillColor = Color.Magenta;
+            character.Position = new Vector2f(100.0f, 100.0f);
         }
 
         public void Draw(RenderTarget target, RenderStates states)
         {
-            target.Draw(shape, states);
+            character.Draw(target, states);
         }
 
         public void HandleInput()
@@ -41,8 +43,6 @@ namespace Fishie.Entities
         public void Update(float deltaTime)
         {
             character.Update(deltaTime);
-            shape.Position = character.Position;
-            shape.Rotation = character.Rotation;
         }
 
 

@@ -14,19 +14,19 @@ namespace Fishie.Entities
         private CircleShape shape = new CircleShape(8.0f, 12);
         public FishLittle()
         {
-            character = new Character(new ControlStrategyStatic(),
-                                        new UpdateStrategyVelocity(),
-                                        new CollideStrategyStatic());
-            shape.Origin = new Vector2f(8.0f, 8.0f);
-            shape.FillColor = Color.Green;
-            character.Position = new Vector2f(-100.0f, 100.0f);
+            character = new Character();
+            character.ControlStrategy = new ControlStrategyStatic();
+            character.UpdateStrategy = new UpdateStrategyVelocity();
+            character.CollideStrategy = new CollideStrategyStatic();
             character.Radius = 8.0f;
-
+            character.FillColor = Color.Green;
+            character.Position = new Vector2f(-100.0f, 100.0f);
+            
         }
 
         public void Draw(RenderTarget target, RenderStates states)
         {
-            target.Draw(shape, states);
+            target.Draw(character, states);
         }
 
         public void HandleInput()
@@ -41,8 +41,6 @@ namespace Fishie.Entities
         public void Update(float deltaTime)
         {
             character.Update(deltaTime);
-            shape.Position = character.Position;
-            shape.Rotation = character.Rotation;
         }
 
 

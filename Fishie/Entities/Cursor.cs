@@ -10,19 +10,20 @@ namespace Fishie.Entities
     public class Cursor : Entity, Drawable
     {
         private Character character;
-        private CircleShape shape = new CircleShape(6.0f, 3);
-        private RenderWindow window;
         public Cursor(RenderWindow window)
         {
-            this.window = window;
-            character = new Character(new ControlStrategyMouse(window), new UpdateStrategyVelocity(), new CollideStrategyStatic());
-            shape.Origin = new Vector2f(3.0f, 3.0f);
-            shape.FillColor = Color.Red;
+            character = new Character();
+            character.ControlStrategy = new ControlStrategyMouse(window);
+            character.UpdateStrategy = new UpdateStrategyVelocity();
+            character.CollideStrategy = new CollideStrategyStatic();
+            character.Radius = 6.0f;
+            character.PointCount = 3;
+            character.FillColor = Color.Red;
         }
 
         public void Draw(RenderTarget target, RenderStates states)
         {
-            target.Draw(shape, states);
+            target.Draw(character, states);
         }
 
         public void HandleInput()
@@ -38,7 +39,6 @@ namespace Fishie.Entities
         public void Update(float deltaTime)
         {
             character.Update(deltaTime);
-            shape.Position = character.Position;
         }
 
         public Character GetCharacter()
