@@ -21,6 +21,7 @@ namespace Fishie.Entities
 
         public void Update(float deltaTime, float scalar = 1.0f)
         {
+            ClearDeadEntities();
             deltaTime = deltaTime * scalar;
             foreach (Entity e in entities)
             {
@@ -49,7 +50,8 @@ namespace Fishie.Entities
                     }
                     if (Touch(entities[i], entities[j]))
                     {
-                        if (!entities[i].HasContact(entities[j])) {
+                        if (!entities[i].HasContact(entities[j]))
+                        {
                             entities[i].OnTouch(entities[j]);
                             entities[j].OnTouch(entities[i]);
                             Log.Debug("Touch!");
@@ -84,8 +86,25 @@ namespace Fishie.Entities
 
             Vector2f Distance = B.Position - A.Position;
             float RadiusSum = A.Radius + B.Radius;
-            float DistanceLen = (float) Math.Sqrt((double)(Distance.X * Distance.X + Distance.Y * Distance.Y));
+            float DistanceLen = (float)Math.Sqrt((double)(Distance.X * Distance.X + Distance.Y * Distance.Y));
             return (Math.Abs(DistanceLen - RadiusSum) < TOUCH_GAP);
+        }
+
+        private void ClearDeadEntities()
+        {
+            List<Entity> entitiesDead = new List<Entity>();
+            foreach (Entity e in entities)
+            {
+                if (!e.IsAlive)
+                {
+                    entitiesDead.Add(e);
+                }
+            }
+            foreach (Entity e in entitiesDead)
+            {
+                entities.Remove(e);
+            }
+            entitiesDead.Clear();
         }
 
         private Vector2f gravity;

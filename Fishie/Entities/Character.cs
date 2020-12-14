@@ -64,10 +64,7 @@ namespace Fishie.Entities
 
         public void Update(float deltaTime)
         {
-            if (UpdateStrategy != null) UpdateStrategy.Update(entity, deltaTime);
-            circle.Position = Position;
-            circle.Rotation = Rotation;
-
+           
             List<Effect> effectsEllapced = new List<Effect>();
             foreach (Effect e in effects)
             {
@@ -86,6 +83,12 @@ namespace Fishie.Entities
                 effects.Remove(e);
             }
             effectsEllapced.Clear();
+
+            if (UpdateStrategy != null) UpdateStrategy.Update(entity, deltaTime);
+            circle.Position = Position;
+            circle.Rotation = Rotation;
+            circle.Scale = Scale;
+            circle.Radius = Radius;
 
         }
 

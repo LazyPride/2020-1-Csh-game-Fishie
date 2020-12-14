@@ -7,12 +7,12 @@ using System.Text;
 
 namespace Fishie.Effects
 {
-    public class EffectSwapColors : Effect
+    public class EffectIncreaseSize : Effect
     {
-        public EffectSwapColors(Entity A, Entity B) : base()
+        public EffectIncreaseSize(Entity A, float percent) : base()
         {
             this.A = A;
-            this.B = B;
+            this.percent = 1.0f + percent;
             Timeout = 0.0f;
         }
         public override void Update(float deltaTime)
@@ -21,9 +21,7 @@ namespace Fishie.Effects
 
         public override void OnApply()
         {
-            Color color = A.Character.FillColor;
-            A.Character.FillColor = B.Character.FillColor;
-            B.Character.FillColor = color;
+            A.Character.Radius *= percent;
         }
 
         public override void OnTimeoutElapsed()
@@ -36,6 +34,6 @@ namespace Fishie.Effects
         }
 
         private Entity A;
-        private Entity B;
+        private float percent;
     }
 }

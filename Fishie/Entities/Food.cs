@@ -1,27 +1,18 @@
-﻿using Fishie.Behaviour;
-using Fishie.Effects;
+﻿using Fishie.Effects;
 using SFML.Graphics;
-using SFML.System;
-using SFML.Window;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Fishie.Entities
 {
-    public class Fish : Entity
+    public class Food : Entity
     {
-        public Fish(RenderWindow window) : base()
+        public Food(List<Effect> touchEffects, List<Effect> detachEffects) : base()
         {
-            this.window = window;
             Character = new Character(this);
-            Character.ControlStrategy = new ControlStrategyFollowMouse(window);
-            Character.UpdateStrategy = new UpdateStrategyVelocity();
-            Character.CollideStrategy = new CollideStrategyStatic();
-            Character.Radius = 12.0f;
-            Character.PointCount = 8;
-            Character.FillColor = Color.Magenta;
-            Character.Position = new Vector2f(100.0f, 100.0f);
+            this.touchEffects.AddRange(touchEffects);
+            this.detachEffects.AddRange(detachEffects);
         }
         public override void Draw(RenderTarget target, RenderStates states)
         {
@@ -46,14 +37,24 @@ namespace Fishie.Entities
 
         protected override void DoTouch(Entity entity)
         {
-            Character.ApplyEffect(new EffectSwapColors(this, entity));
+            if (entity.GetType().Name.Equals("Fish"))
+            {
+                foreach (Effect e in touchEffects)
+                {
+                    entity.Character.ApplyEffect(e);
+                }
+                IsAlive = false;
+            }
         }
 
         protected override void DoDetach(Entity entity)
         {
-            Character.ApplyEffect(new EffectIncreaseSpeed(this, 1.0f, 5.0f));
+            foreach (Effect e in detachEffects)
+            {
+                entity.Character.ApplyEffect(e);
+            }
         }
-
-        private RenderWindow window;
+        private List<Effect> touchEffects = new List<Effect>();
+        private List<Effect> detachEffects = new List<Effect>();
     }
 }

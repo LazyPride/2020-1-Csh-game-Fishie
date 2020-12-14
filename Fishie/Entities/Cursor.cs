@@ -9,7 +9,7 @@ namespace Fishie.Entities
 {
     public class Cursor : Entity
     {
-        public Cursor(RenderWindow window)
+        public Cursor(RenderWindow window) : base()
         {
             Character = new Character(this);
             Character.ControlStrategy = new ControlStrategyMouse(window);

@@ -8,6 +8,11 @@ namespace Fishie.Entities
     public abstract class Entity : Drawable
     {
         public Character Character { set;  get; }
+        public bool IsAlive { get; set; }
+        public Entity()
+        {
+            IsAlive = true;
+        }
         public abstract void HandleInput();
         public abstract void RegisterEventHandlers(RenderWindow target);
         public abstract void Update(float deltaTime);
