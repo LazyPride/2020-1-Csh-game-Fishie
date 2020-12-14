@@ -19,6 +19,7 @@ namespace Fishie.Behaviour
 
             // TODO: cAdd type(Dynamic, Static) physical object check
             // If object Static than its position is imutable
+            Log.Debug("collide");
             Vector2f normal = Distance / DistanceLen;
             cA.Position -= Overlap * 0.5f * normal;
             cB.Position += Overlap * 0.5f * normal;

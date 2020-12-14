@@ -19,6 +19,7 @@ namespace Fishie.Entities
             Character.UpdateStrategy = new UpdateStrategyVelocity();
             Character.CollideStrategy = new CollideStrategyStatic();
             Character.Radius = 12.0f;
+            Character.Mass = 12.0f;
             Character.PointCount = 8;
             Character.FillColor = Color.Magenta;
             Character.Position = new Vector2f(100.0f, 100.0f);
@@ -38,10 +39,6 @@ namespace Fishie.Entities
         public override void Update(float deltaTime)
         {
             Character.Update(deltaTime);
-        }
-        public override void OnCollide(Entity entity)
-        {
-            Character.OnCollide(entity);
         }
 
         protected override void DoTouch(Entity entity)

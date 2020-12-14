@@ -29,10 +29,6 @@ namespace Fishie.Entities
         {
             Character.Update(deltaTime);
         }
-        public override void OnCollide(Entity entity)
-        {
-            Character.OnCollide(entity);
-        }
 
         protected override void DoTouch(Entity entity)
         {

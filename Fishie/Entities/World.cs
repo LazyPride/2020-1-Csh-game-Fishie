@@ -45,8 +45,8 @@ namespace Fishie.Entities
                 {
                     if (Intersects(entities[i], entities[j]))
                     {
-                        entities[i].OnCollide(entities[j]);
-                        entities[j].OnCollide(entities[i]);
+                        entities[i].Character.OnCollide(entities[j]);
+                        entities[j].Character.OnCollide(entities[i]);
                     }
                     if (Touch(entities[i], entities[j]))
                     {

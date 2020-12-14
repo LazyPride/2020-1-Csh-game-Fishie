@@ -12,9 +12,9 @@ namespace Fishie.Entities
         public Vector2f Velocity { get; set; }
         public Vector2f AccelerationAngular { get; set; }
         public Vector2f VelocityAngular { get; set; }
-        public Vector2f Mass { get; set; }
-        public Vector2f MassInverted { get; set; }
-        public Vector2f Inertia { get; set; }
-        public Vector2f InertiaInverted { get; set; }
+        public float Mass { get; set; }
+        public float MassInverted { get; set; }
+        public float Inertia { get; set; }
+        public float InertiaInverted { get; set; }
     }
 }

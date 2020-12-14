@@ -40,9 +40,10 @@ namespace Fishie.Spawners
                     List<Effect> touchEffects = new List<Effect>();
                     touchEffects.Add(createEffect(color));
                     Food food = new Food(touchEffects);
-                    food.Character.CollideStrategy = new CollideStrategyStatic();
+                    food.Character.UpdateStrategy = new UpdateStrategyDynamic();
                     food.Character.Position = GetPositionInside(spawnArea);
                     food.Character.Radius = random.Next(5, 10);
+                    food.Character.Mass = food.Character.Radius;
                     food.Character.FillColor = color;
                     return food;
                 }

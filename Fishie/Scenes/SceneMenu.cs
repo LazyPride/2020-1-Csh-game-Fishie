@@ -1,4 +1,5 @@
-﻿using Fishie.Entities;
+﻿using Fishie.Behaviour;
+using Fishie.Entities;
 using Fishie.Spawners;
 using SFML.Graphics;
 using SFML.System;
@@ -43,6 +44,8 @@ namespace Fishie.Scenes
             foodSpawner = new FoodSpawner(new FloatRect(0.0f, 0.0f, 300.0f, 100.0f), 100, 0.10f);
 
             world.AddEnity(fish);
+            Entity little = new FishLittle();
+            world.AddEnity(little);
 
             game.GetWindow().SetMouseCursorVisible(false);
         }
@@ -57,11 +60,13 @@ namespace Fishie.Scenes
 
         public void Update(float deltaTime)
         {
+            
             Entity e = foodSpawner.Spawn();
             if (e != null)
             {
                 world.AddEnity(e);
             }
+            
             world.Update(deltaTime);
             cursor.Update(deltaTime);
             camera.Update();
