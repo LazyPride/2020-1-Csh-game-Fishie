@@ -1,4 +1,5 @@
-﻿using SFML.Graphics;
+﻿using Fishie.Entities;
+using SFML.Graphics;
 using SFML.System;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,9 @@ namespace Fishie.Effects
         {
             return (clock.ElapsedTime.AsSeconds() > Timeout);
         }
-        public abstract void Update(float deltaTime);
-        public abstract void OnApply();
-        public abstract void OnTimeoutElapsed();
+        public abstract void Update(Entity e, float deltaTime);
+        public abstract void OnApply(Entity e);
+        public abstract void OnTimeoutElapsed(Entity e);
         public abstract void Draw(RenderTarget target, RenderStates states);
         
         protected Clock clock = new Clock();

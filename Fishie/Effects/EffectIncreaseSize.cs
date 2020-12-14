@@ -9,22 +9,21 @@ namespace Fishie.Effects
 {
     public class EffectIncreaseSize : Effect
     {
-        public EffectIncreaseSize(Entity A, float percent) : base()
+        public EffectIncreaseSize(float radius) : base()
         {
-            this.A = A;
-            this.percent = 1.0f + percent;
+            this.radius = radius;
             Timeout = 0.0f;
         }
-        public override void Update(float deltaTime)
+        public override void Update(Entity e, float deltaTime)
         {
         }
 
-        public override void OnApply()
+        public override void OnApply(Entity e)
         {
-            A.Character.Radius *= percent;
+            e.Character.Radius += radius;
         }
 
-        public override void OnTimeoutElapsed()
+        public override void OnTimeoutElapsed(Entity e)
         {
             
         }
@@ -33,7 +32,6 @@ namespace Fishie.Effects
         {
         }
 
-        private Entity A;
-        private float percent;
+        private float radius;
     }
 }

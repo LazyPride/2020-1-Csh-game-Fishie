@@ -46,12 +46,10 @@ namespace Fishie.Entities
 
         protected override void DoTouch(Entity entity)
         {
-            Character.ApplyEffect(new EffectSwapColors(this, entity));
         }
 
         protected override void DoDetach(Entity entity)
         {
-            Character.ApplyEffect(new EffectIncreaseSpeed(this, 1.0f, 5.0f));
         }
 
         private RenderWindow window;

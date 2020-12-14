@@ -54,7 +54,6 @@ namespace Fishie.Entities
                         {
                             entities[i].OnTouch(entities[j]);
                             entities[j].OnTouch(entities[i]);
-                            Log.Debug("Touch!");
                         }
                     }
                     else
@@ -63,7 +62,6 @@ namespace Fishie.Entities
                         {
                             entities[i].OnDetach(entities[j]);
                             entities[j].OnDetach(entities[i]);
-                            Log.Debug("Detach!");
                         }
                     }
                 }

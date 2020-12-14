@@ -1,4 +1,5 @@
 ﻿using Fishie.Entities;
+using Fishie.Spawners;
 using SFML.Graphics;
 using SFML.System;
 using System;
@@ -16,7 +17,6 @@ namespace Fishie.Scenes
 
         public void Draw(RenderTarget target, RenderStates states)
         {
-            target.Draw(circle, states);
             target.Draw(world, states);
             target.Draw(cursor, states);
         }
@@ -37,15 +37,12 @@ namespace Fishie.Scenes
             this.game = game;
             world = new World();
 
-            circle = new CircleShape(10.0f);
-            circle.Position = new Vector2f(100, 100);
             fish = new Fish(game.GetWindow());
             camera = new Camera(new Vector2f(800, 600), game.GetWindow(), fish);
             cursor = new Cursor(game.GetWindow());
+            foodSpawner = new FoodSpawner(new FloatRect(0.0f, 0.0f, 300.0f, 100.0f), 100, 0.10f);
 
-            FishLittle little = new FishLittle();
             world.AddEnity(fish);
-            world.AddEnity(little);
 
             game.GetWindow().SetMouseCursorVisible(false);
         }
@@ -60,6 +57,11 @@ namespace Fishie.Scenes
 
         public void Update(float deltaTime)
         {
+            Entity e = foodSpawner.Spawn();
+            if (e != null)
+            {
+                world.AddEnity(e);
+            }
             world.Update(deltaTime);
             cursor.Update(deltaTime);
             camera.Update();
@@ -68,9 +70,9 @@ namespace Fishie.Scenes
 
         private Game game;
         private World world;
-        private CircleShape circle;
         private Fish fish;
         private Camera camera;
         private Cursor cursor;
+        private FoodSpawner foodSpawner;
     }
 }

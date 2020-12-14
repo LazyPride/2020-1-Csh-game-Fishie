@@ -8,9 +8,8 @@ namespace Fishie.Effects
 {
     class EffectIncreaseSpeed : Effect
     {
-        public EffectIncreaseSpeed(Entity A, float percent, float seconds) : base()
+        public EffectIncreaseSpeed(float percent, float seconds) : base()
         {
-            this.A = A;
             this.percent = 1.0f + percent;
             Timeout = seconds;
         }
@@ -18,21 +17,18 @@ namespace Fishie.Effects
         {
         }
 
-        public override void OnApply()
+        public override void OnApply(Entity e)
         {
-            Log.Info("Started speed");
         }
 
-        public override void OnTimeoutElapsed()
+        public override void OnTimeoutElapsed(Entity e)
         {
-            Log.Info("Speed over!");
         }
 
-        public override void Update(float deltaTime)
+        public override void Update(Entity e, float deltaTime)
         {
-            A.Character.Velocity *= percent;
+            e.Character.Velocity *= percent;
         }
-        private Entity A;
         private float percent;
     }
 }

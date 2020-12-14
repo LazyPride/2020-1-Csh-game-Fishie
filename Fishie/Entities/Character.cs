@@ -70,12 +70,12 @@ namespace Fishie.Entities
             {
                 if (e.hasElapsed())
                 {
-                    e.OnTimeoutElapsed();
+                    e.OnTimeoutElapsed(entity);
                     effectsEllapced.Add(e);
                 }
                 else
                 {
-                    e.Update(deltaTime);
+                    e.Update(entity, deltaTime);
                 }
             }
             foreach (Effect e in effectsEllapced)
@@ -110,13 +110,13 @@ namespace Fishie.Entities
         {
             if (effect.Timeout == 0.0f)
             {
-                effect.OnApply();
-                effect.OnTimeoutElapsed();
+                effect.OnApply(entity);
+                effect.OnTimeoutElapsed(entity);
             }
             else if (!IsPresent(effect))
             {
                 effects.Add(effect);
-                effect.OnApply();
+                effect.OnApply(entity);
             }
         }
 

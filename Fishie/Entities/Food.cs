@@ -8,11 +8,10 @@ namespace Fishie.Entities
 {
     public class Food : Entity
     {
-        public Food(List<Effect> touchEffects, List<Effect> detachEffects) : base()
+        public Food(List<Effect> touchEffects) : base()
         {
             Character = new Character(this);
             this.touchEffects.AddRange(touchEffects);
-            this.detachEffects.AddRange(detachEffects);
         }
         public override void Draw(RenderTarget target, RenderStates states)
         {
@@ -49,12 +48,8 @@ namespace Fishie.Entities
 
         protected override void DoDetach(Entity entity)
         {
-            foreach (Effect e in detachEffects)
-            {
-                entity.Character.ApplyEffect(e);
-            }
+            
         }
         private List<Effect> touchEffects = new List<Effect>();
-        private List<Effect> detachEffects = new List<Effect>();
     }
 }
