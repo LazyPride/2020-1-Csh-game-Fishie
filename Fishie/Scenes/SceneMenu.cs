@@ -42,9 +42,10 @@ namespace Fishie.Scenes
             world = new World();
 
             cursor = new MyCursor(game.GetWindow());
+            cursor.Character.Position = new Vector2f(960.0f, 600.0f);
             fish = new Fish(cursor);
-            fish.Character.Position = new Vector2f(960.0f, 540.0f);
-            camera = new Camera(new Vector2f(800, 600), game.GetWindow(), fish);
+            fish.Character.Position = new Vector2f(960.0f, 600.0f);
+            camera = new Camera(new Vector2f(800, 600), new FloatRect(0.0f, 0.0f, 1920.0f, 1200.0f), game.GetWindow(), fish);
             foodSpawner = new FoodSpawner(new FloatRect(100.0f, 100.0f, 1700.0f, 300.0f), 100, 0.10f);
 
             world.AddEnity(fish);
