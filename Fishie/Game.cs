@@ -56,7 +56,7 @@ namespace Fishie
             window.Closed += OnClose;
 
             scenes = new Stack<IScene>(5);
-            PushScene(new ScenePlay());
+            PushScene(new SceneMenu());
         }
 
         private RenderWindow window;

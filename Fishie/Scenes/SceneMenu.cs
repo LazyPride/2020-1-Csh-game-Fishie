@@ -10,9 +10,9 @@ using System.Text;
 
 namespace Fishie.Scenes
 {
-    public class ScenePause : IScene
+    public class SceneMenu : IScene
     {
-        public ScenePause()
+        public SceneMenu()
         {
 
         }
@@ -20,8 +20,8 @@ namespace Fishie.Scenes
         public void Draw(RenderTarget target, RenderStates states)
         {
             target.Draw(background);
-            target.Draw(resume);
-            target.Draw(menu);
+            target.Draw(play);
+            target.Draw(exit);
         }
 
         public void HandleInput()
@@ -40,43 +40,55 @@ namespace Fishie.Scenes
             view = new View(new FloatRect(0.0f, 0.0f, 800.0f, 600.0f));
             background = new RectangleShape(new Vector2f(800.0f, 600.0f));
             background.FillColor = new Color(0, 171, 217);
-            resume = new Button(new Vector2f(100.0f, 100.0f),
+            play = new Button(new Vector2f(100.0f, 100.0f),
                                   new Vector2f(256.0f, 128.0f),
-                                  "Resume",
+                                  "Play",
                                   () =>
                                   {
-                                      game.PopScene();
+                                      game.PushScene(new ScenePlay());
+                                      play.UnregisterEventHandlers(game.GetWindow());
+                                      exit.UnregisterEventHandlers(game.GetWindow());
+                                      isCallbackRegistered = false;
                                   });
-            menu = new Button(new Vector2f(100.0f, 300.0f),
+            exit = new Button(new Vector2f(100.0f, 300.0f),
                                   new Vector2f(256.0f, 128.0f),
-                                  "Menu",
+                                  "Exit",
                                   () =>
                                   {
-                                      game.PopScene(2);
+                                      game.GetWindow().Close();
                                   });
             game.GetWindow().SetView(view);
         }
 
         public void RegisterEventHandlers(RenderWindow target)
         {
-            resume.RegisterEventHandlers(target);
-            menu.RegisterEventHandlers(target);
+            play.RegisterEventHandlers(target);
+            exit.RegisterEventHandlers(target);
+            isCallbackRegistered = true;
         }
 
         public void UnregisterEventHandlers(RenderWindow target)
         {
-            resume.UnregisterEventHandlers(target);
-            menu.UnregisterEventHandlers(target);
+            play.UnregisterEventHandlers(target);
+            exit.UnregisterEventHandlers(target);
+            isCallbackRegistered = false;
         }
 
         public void Update(float deltaTime)
         { 
+            if (!isCallbackRegistered)
+            {
+                play.RegisterEventHandlers(game.GetWindow());
+                exit.RegisterEventHandlers(game.GetWindow());
+                isCallbackRegistered = true;
+            }
         }
 
         private Game game;
         private View view;
         private RectangleShape background;
-        private Button resume;
-        private Button menu;
+        private Button play;
+        private Button exit;
+        private Boolean isCallbackRegistered = false;
     }
 }
