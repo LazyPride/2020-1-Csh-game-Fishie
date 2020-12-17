@@ -10,7 +10,6 @@ namespace Fishie.Behaviour
     {
         public void OnCollide(Entity A, Entity B)
         {
-            Log.Debug("collide void");
         }
     }
 }

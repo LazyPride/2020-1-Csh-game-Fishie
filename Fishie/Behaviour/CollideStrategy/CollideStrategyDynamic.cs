@@ -15,7 +15,6 @@ namespace Fishie.Behaviour
             Vector2f Distance = cA.Position - cB.Position;
             float DistanceLen = (float) Math.Sqrt( (double) (Distance.X * Distance.X + Distance.Y * Distance.Y));
 
-            Log.Debug("collide dynamic");
             Vector2f normal = Distance / DistanceLen;
             Vector2f tangent = new Vector2f(-normal.Y, normal.X);
 

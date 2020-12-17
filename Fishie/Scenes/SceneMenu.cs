@@ -38,14 +38,15 @@ namespace Fishie.Scenes
 
         public void OnPush(Game game)
         {
+            FloatRect gameArea = new FloatRect(0.0f, 0.0f, 1920.0f, 1200.0f);
             this.game = game;
-            world = new World();
+            world = new World(gameArea);
 
-            cursor = new MyCursor(game.GetWindow());
+            cursor = new MyCursor(game.GetWindow(), gameArea);
             cursor.Character.Position = new Vector2f(960.0f, 600.0f);
             fish = new Fish(cursor);
             fish.Character.Position = new Vector2f(960.0f, 600.0f);
-            camera = new Camera(new Vector2f(800, 600), new FloatRect(0.0f, 0.0f, 1920.0f, 1200.0f), game.GetWindow(), fish);
+            camera = new Camera(new Vector2f(800, 600), gameArea, game.GetWindow(), fish);
             foodSpawner = new FoodSpawner(new FloatRect(100.0f, 100.0f, 1700.0f, 300.0f), 100, 0.10f);
 
             world.AddEnity(fish);
