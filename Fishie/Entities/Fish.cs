@@ -11,11 +11,11 @@ namespace Fishie.Entities
 {
     public class Fish : Entity
     {
-        public Fish(RenderWindow window) : base()
+        public Fish(Entity entityToFollow) : base()
         {
             this.window = window;
             Character = new Character(this);
-            Character.ControlStrategy = new ControlStrategyFollowMouse(window);
+            Character.ControlStrategy = new ControlStrategyFollowEntity(entityToFollow);
             Character.UpdateStrategy = new UpdateStrategyVelocity();
             Character.CollideStrategy = new CollideStrategyStatic();
             Character.Radius = 12.0f;

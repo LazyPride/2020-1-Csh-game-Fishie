@@ -6,6 +6,7 @@ using Fishie.Scenes;
 using SFML;
 using SFML.Graphics;
 using SFML.System;
+using SFML.Window;
 
 namespace Fishie
 {
@@ -49,7 +50,7 @@ namespace Fishie
         }
         private void Init()
         {
-            window = new RenderWindow(new SFML.Window.VideoMode(800, 600), "Fishie");
+            window = new RenderWindow(new SFML.Window.VideoMode(800, 600), "Fishie", Styles.None);
             
             window.SetVerticalSyncEnabled(true);
             window.Closed += OnClose;

@@ -7,9 +7,9 @@ using System.Text;
 
 namespace Fishie.Entities
 {
-    public class Cursor : Entity
+    public class MyCursor : Entity
     {
-        public Cursor(RenderWindow window) : base()
+        public MyCursor(RenderWindow window) : base()
         {
             Character = new Character(this);
             Character.ControlStrategy = new ControlStrategyMouse(window);
