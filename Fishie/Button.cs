@@ -19,14 +19,20 @@ namespace Fishie
             this.action = action;
             font = new Font("res/arial.ttf");
             text = new Text(str, font);
+            text.FillColor = Color.Black;
             // Centering text
-            text.Position = button.Position + (button.Size -
-                new Vector2f(text.GetLocalBounds().Width, text.GetLocalBounds().Height));
+            Vector2f textSize = new Vector2f(text.GetLocalBounds().Width + text.GetLocalBounds().Left,
+                                        text.GetLocalBounds().Height + text.GetLocalBounds().Top);
+            text.Position = button.Position + (button.Size - textSize) / 2;
         }
 
         public void RegisterEventHandlers(RenderWindow target)
         {
             target.MouseButtonPressed += OnMousePressedFunction;
+        }
+        public void UnregisterEventHandlers(RenderWindow target)
+        {
+            target.MouseButtonPressed -= OnMousePressedFunction;
         }
         public void Draw(RenderTarget target, RenderStates states)
         {

@@ -22,7 +22,7 @@ namespace Fishie
             scene.OnPush(this);
             scene.RegisterEventHandlers(window);
         }
-        public void PopScene(int quantity)
+        public void PopScene(int quantity = 1)
         {
             IsShouldPop = true;
             PopQuantity = quantity;
@@ -36,7 +36,7 @@ namespace Fishie
                 float deltaTime = clock.Restart().AsSeconds();
                 window.DispatchEvents();
 
-                IScene currentScene = scenes.Last();
+                IScene currentScene = scenes.Peek();
 
                 currentScene.HandleInput();
                 currentScene.Update(deltaTime);
@@ -55,8 +55,8 @@ namespace Fishie
             window.SetVerticalSyncEnabled(true);
             window.Closed += OnClose;
 
-            scenes = new Stack<IScene>();
-            PushScene(new SceneMenu());
+            scenes = new Stack<IScene>(5);
+            PushScene(new ScenePlay());
         }
 
         private RenderWindow window;

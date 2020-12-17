@@ -10,9 +10,9 @@ using System.Text;
 
 namespace Fishie.Scenes
 {
-    public class SceneMenu : IScene
+    public class ScenePlay : IScene
     {
-        public SceneMenu()
+        public ScenePlay()
         {
 
         }
@@ -59,10 +59,21 @@ namespace Fishie.Scenes
 
         public void RegisterEventHandlers(RenderWindow target)
         {
+            target.KeyPressed += OnKeyPressed;
         }
 
         public void UnregisterEventHandlers(RenderWindow target)
         {
+            target.KeyPressed -= OnKeyPressed;
+        }
+
+        private void OnKeyPressed(object sender, KeyEventArgs e)
+        {
+            if (e.Code == Keyboard.Key.Escape)
+            {
+                Log.Warn("Escape pressed");
+                game.PushScene(new ScenePause());
+            }
         }
 
         public void Update(float deltaTime)
