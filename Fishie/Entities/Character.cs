@@ -99,6 +99,10 @@ namespace Fishie.Entities
         public void Draw(RenderTarget target, RenderStates states)
         {
             target.Draw(circle, states);
+            foreach (Effect e in effects)
+            {
+                target.Draw(e, states);
+            }
         }
 
         public void OnCollide(Entity entity)

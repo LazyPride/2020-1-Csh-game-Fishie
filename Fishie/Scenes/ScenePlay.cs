@@ -33,7 +33,7 @@ namespace Fishie.Scenes
 
         public void OnPop()
         {
-            //game.GetWindow().SetMouseCursorVisible(true);
+            game.GetWindow().SetMouseCursorVisible(true);
         }
 
         public void OnPush(Game game)
@@ -50,11 +50,11 @@ namespace Fishie.Scenes
             foodSpawner = new FoodSpawner(new FloatRect(100.0f, 100.0f, 1700.0f, 300.0f), 100, 0.10f);
 
             world.AddEnity(fish);
-            Entity little = new FishLittle();
+            Entity little = new FishColor();
             world.AddEnity(little);
             aqvariumTexture = new Texture("res/aqvarium.jpg");
             aqvarium = new Sprite(aqvariumTexture);
-            //game.GetWindow().SetMouseCursorVisible(false);
+            game.GetWindow().SetMouseCursorVisible(false);
         }
 
         public void RegisterEventHandlers(RenderWindow target)

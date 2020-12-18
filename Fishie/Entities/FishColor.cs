@@ -8,10 +8,10 @@ using System.Text;
 
 namespace Fishie.Entities
 {
-    public class FishLittle : Entity
+    public class FishColor : Entity
     {
         private CircleShape shape = new CircleShape(8.0f, 12);
-        public FishLittle()
+        public FishColor()
         {
             Character = new Character(this);
             Character.ControlStrategy = new ControlStrategyVoid();

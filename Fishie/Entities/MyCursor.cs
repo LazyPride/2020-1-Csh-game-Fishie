@@ -16,7 +16,7 @@ namespace Fishie.Entities
             Character.UpdateStrategy = new UpdateStrategyVelocity();
             Character.Radius = 6.0f;
             Character.PointCount = 3;
-            Character.FillColor = Color.Red;
+            Character.FillColor = Color.Magenta;
             this.gameArea = gameArea;
         }
 

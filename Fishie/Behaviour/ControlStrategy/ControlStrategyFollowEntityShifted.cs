@@ -8,16 +8,16 @@ using System.Text;
 
 namespace Fishie.Behaviour
 {
-    public class ControlStrategyFollowEntity : IControlStrategy
+    public class ControlStrategyFollowEntityShifted : IControlStrategy
     {
-        public ControlStrategyFollowEntity(Entity entityToFollow)
+        public ControlStrategyFollowEntityShifted(Entity entityToFollow)
         {
             this.entityToFollow = entityToFollow;
         }
         public void HandleInput(Entity entity)
         {
             Character character = entity.Character;
-            Vector2f direction = entityToFollow.Character.Position - character.Position;
+            Vector2f direction = entityToFollow.Character.Position - character.Position + new Vector2f(135.0f, -57.0f);
             double angle = Math.Atan2(direction.Y, direction.X) * 180.0 / Math.PI + 180.0;
             if (!Double.IsNaN(angle))
             {

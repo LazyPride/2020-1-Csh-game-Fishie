@@ -6,11 +6,10 @@ using System.Text;
 
 namespace Fishie.Effects
 {
-    class EffectIncreaseSpeed : Effect
+    class EffectSlowness : Effect
     {
-        public EffectIncreaseSpeed(float multipler, float seconds) : base()
+        public EffectSlowness(float seconds) : base()
         {
-            this.multipler = multipler;
             Timeout = seconds;
         }
         public override void Draw(RenderTarget target, RenderStates states)
@@ -19,19 +18,18 @@ namespace Fishie.Effects
 
         public override void OnApply(Entity e)
         {
-            Log.Info("Effect: Speed");
+            Log.Info("Effect: Slowness");
             clock.Restart();
         }
 
         public override void OnTimeoutElapsed(Entity e)
         {
-            Log.Warn("Effect end: Speed");
+            Log.Warn("Effect end: Slowness");
         }
 
         public override void Update(Entity e, float deltaTime)
         {
-            e.Character.Velocity *= multipler;
+            e.Character.Velocity *= 0.1f;
         }
-        private float multipler;
     }
 }

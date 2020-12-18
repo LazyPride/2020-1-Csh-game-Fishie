@@ -21,7 +21,6 @@ namespace Fishie.Spawners
             colors.Add(Color.Blue);
             colors.Add(Color.Cyan);
             colors.Add(Color.Green);
-            colors.Add(Color.Magenta);
             colors.Add(Color.Red);
             colors.Add(Color.White);
             colors.Add(Color.Yellow);
@@ -63,37 +62,33 @@ namespace Fishie.Spawners
         {
             if (color == Color.Black)
             {
-
+                return new EffectBlindess(220, 5);
             }
             else if (color == Color.Blue)
             {
-
-            }
-            else if (color == Color.Cyan)
-            {
-
+                return new EffectColors(6);
             }
             else if (color == Color.Green)
             {
-
+                return new EffectIncreaseSize(1.0f);
             }
-            else if (color == Color.Magenta)
+            else if (color == Color.Cyan)
             {
-
+                return new EffectSlowness(6.0f);
             }
             else if (color == Color.Red)
             {
-
+                return new EffectIncreaseSizeFake(30.0f, 5.0f);
             }
             else if (color == Color.White)
             {
-
+                return new EffectIncreaseSpeed(3.0f, 5.0f);
             }
             else if (color == Color.Yellow)
             {
-
+                return new EffectTaser(5.0f);
             }
-            return new EffectIncreaseSize(1.0f);
+            return new EffectVoid();
         }
 
         private Clock clock = new Clock();

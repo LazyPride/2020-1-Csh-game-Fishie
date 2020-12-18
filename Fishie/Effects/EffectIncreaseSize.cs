@@ -20,6 +20,7 @@ namespace Fishie.Effects
 
         public override void OnApply(Entity e)
         {
+            Log.Info("Effect once: Increase size");
             e.Character.Radius += radius;
         }
 
