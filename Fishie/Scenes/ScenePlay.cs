@@ -26,7 +26,7 @@ namespace Fishie.Scenes
 
         public void HandleInput()
         {
-            fish.HandleInput();
+            world.HandleInput();
             cursor.HandleInput();
             Mouse.SetPosition(game.GetWindow().Position + (Vector2i)game.GetWindow().Size / 2);
         }
@@ -38,23 +38,34 @@ namespace Fishie.Scenes
 
         public void OnPush(Game game)
         {
+            aqvariumTexture = new Texture("res/aqvarium.jpg");
+            aqvarium = new Sprite(aqvariumTexture);
             FloatRect gameArea = new FloatRect(0.0f, 0.0f, 1920.0f, 1200.0f);
             this.game = game;
+            game.GetWindow().SetMouseCursorVisible(false);
+
             world = new World(gameArea);
 
             cursor = new MyCursor(game.GetWindow(), gameArea);
             cursor.Character.Position = new Vector2f(960.0f, 600.0f);
-            fish = new Fish(cursor);
-            fish.Character.Position = new Vector2f(960.0f, 600.0f);
-            camera = new Camera(new Vector2f(800, 600), gameArea, game.GetWindow(), fish);
-            foodSpawner = new FoodSpawner(new FloatRect(100.0f, 100.0f, 1700.0f, 300.0f), 100, 0.10f);
 
+            Entity fish = new Fish(cursor);
+            fish.Character.Position = new Vector2f(960.0f, 600.0f);
             world.AddEnity(fish);
-            Entity little = new FishColor();
-            world.AddEnity(little);
-            aqvariumTexture = new Texture("res/aqvarium.jpg");
-            aqvarium = new Sprite(aqvariumTexture);
-            game.GetWindow().SetMouseCursorVisible(false);
+            
+            camera = new Camera(new Vector2f(800, 600), gameArea, game.GetWindow(), fish);
+
+            spawners.Add(new FoodSpawner(new FloatRect(100.0f, 100.0f, 1700.0f, 400.0f), 100));
+            spawners.Add(new LittleFishSpawner(new FloatRect(100.0f, 800.0f, 100.0f, 200.0f), 50));
+            spawners.Add(new LittleFishSpawner(new FloatRect(1600.0f, 800.0f, 200.0f, 200.0f), 200));
+
+            foreach (Spawner spawner in spawners)
+            {
+                for (int i = 0; i < spawner.GetQuantity(); i++)
+                {
+                    world.AddEnity(spawner.Spawn());
+                }
+            }
         }
 
         public void RegisterEventHandlers(RenderWindow target)
@@ -78,12 +89,6 @@ namespace Fishie.Scenes
 
         public void Update(float deltaTime)
         {
-            Entity e = foodSpawner.Spawn();
-            if (e != null)
-            {
-                world.AddEnity(e);
-            }
-
             world.Update(deltaTime);
             cursor.Update(deltaTime);
             camera.Update();
@@ -92,10 +97,9 @@ namespace Fishie.Scenes
 
         private Game game;
         private World world;
-        private Fish fish;
         private Camera camera;
         private MyCursor cursor;
-        private FoodSpawner foodSpawner;
+        private List<Spawner> spawners = new List<Spawner>();
         private Texture aqvariumTexture;
         private Sprite aqvarium;
     }

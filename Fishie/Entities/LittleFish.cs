@@ -8,19 +8,15 @@ using System.Text;
 
 namespace Fishie.Entities
 {
-    public class FishColor : Entity
+    public class LittleFish : Entity
     {
-        private CircleShape shape = new CircleShape(8.0f, 12);
-        public FishColor()
+        public LittleFish()
         {
             Character = new Character(this);
             Character.ControlStrategy = new ControlStrategyVoid();
             Character.UpdateStrategy = new UpdateStrategyDynamic();
             Character.CollideStrategy = new CollideStrategyDynamic();
-            Character.Radius = 8.0f;
             Character.Mass = 8.0f;
-            Character.FillColor = Color.Green;
-            Character.Position = new Vector2f(-100.0f, 100.0f);
         }
 
         public override void Draw(RenderTarget target, RenderStates states)

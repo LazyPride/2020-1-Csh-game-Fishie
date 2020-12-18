@@ -18,7 +18,7 @@ namespace Fishie.Entities
             Character.ControlStrategy = new ControlStrategyFollowEntity(entityToFollow);
             Character.UpdateStrategy = new UpdateStrategyVelocity();
             Character.CollideStrategy = new CollideStrategyStatic();
-            Character.Radius = 12.0f;
+            Character.Radius = 15.0f;
             Character.Mass = 12.0f;
             Character.PointCount = 8;
             Character.FillColor = Color.Magenta;

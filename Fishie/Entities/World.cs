@@ -17,7 +17,15 @@ namespace Fishie.Entities
 
         public void AddEnity(Entity entity)
         {
-            entities.Add(entity);
+            if (entity != null) entities.Add(entity);
+        }
+
+        public void HandleInput()
+        {
+            foreach (Entity e in entities)
+            {
+                e.HandleInput();
+            }
         }
 
         public void Update(float deltaTime, float scalar = 1.0f)

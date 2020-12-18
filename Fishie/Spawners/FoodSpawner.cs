@@ -11,12 +11,11 @@ namespace Fishie.Spawners
 {
     public class FoodSpawner : Spawner
     {
-        public FoodSpawner(FloatRect spawnArea, uint MaxN, float delayBetweenSpawn)
+        public FoodSpawner(FloatRect spawnArea, uint MaxN)
         {
             this.spawnArea = spawnArea;
             this.maxEntities = MaxN;
             this.currentEntityCounter = 0;
-            this.delayBetweenSpawn = delayBetweenSpawn;
             colors.Add(Color.Black);
             colors.Add(Color.Blue);
             colors.Add(Color.Cyan);
@@ -24,15 +23,11 @@ namespace Fishie.Spawners
             colors.Add(Color.Red);
             colors.Add(Color.White);
             colors.Add(Color.Yellow);
-            clock.Restart();
         }
         public Entity Spawn()
         {
             if (currentEntityCounter < maxEntities)
             {
-                if (clock.ElapsedTime.AsSeconds() > delayBetweenSpawn)
-                {
-                    clock.Restart();
                     currentEntityCounter += 1;
                     Random random = new Random();
                     Color color = colors[random.Next(colors.Count)];
@@ -45,7 +40,6 @@ namespace Fishie.Spawners
                     food.Character.Mass = food.Character.Radius;
                     food.Character.FillColor = color;
                     return food;
-                }
             }
             return null;
         }
@@ -91,11 +85,14 @@ namespace Fishie.Spawners
             return new EffectVoid();
         }
 
-        private Clock clock = new Clock();
+        public uint GetQuantity()
+        {
+            return maxEntities;
+        }
+
         private FloatRect spawnArea;
         private uint maxEntities;
         private uint currentEntityCounter;
-        private float delayBetweenSpawn;
         private List<Color> colors = new List<Color>();
     }
 }

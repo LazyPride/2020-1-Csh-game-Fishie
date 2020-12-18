@@ -8,5 +8,6 @@ namespace Fishie.Spawners
     public interface Spawner
     {
         public Entity Spawn();
+        public uint GetQuantity();
     }
 }
