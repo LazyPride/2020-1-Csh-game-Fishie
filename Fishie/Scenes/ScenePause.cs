@@ -31,6 +31,7 @@ namespace Fishie.Scenes
 
         public void OnPop()
         {
+            game.GetWindow().SetMouseCursorVisible(false);
         }
 
         public void OnPush(Game game)
